@@ -1,6 +1,3 @@
-// TODO: sort groups alphabetically
-// TODO: sort names in groups alphabetically
-//
 #include <iostream>
 #include <map>
 #include <algorithm> 
@@ -10,35 +7,28 @@
 using namespace std;
 int main()
 {
-    string test;
-    string spliter = " ";
-    size_t split = 0;
+    string input;
     regex isAlphabet("[A-Za-z ]+");
     std::map<string, vector<string> > groups;
-    while(getline(cin, test))
+
+    while(getline(cin, input))
     {
-        split = test.find(spliter); 
-        string memberName = test.substr(0,split);
-        string groupName  = test.substr(split+1,test.length());
-        //cout << "Member Name is ='" << memberName<<"' Group name is ='" << groupName << "'" << endl;
+        size_t split = input.find(" "); 
+        string memberName = input.substr(0,split);
+        string groupName  = input.substr(split+1,input.length());
         
-        if(memberName != "" && regex_match(memberName, isAlphabet) && regex_match(groupName, isAlphabet))
+        if(regex_match(memberName, isAlphabet) && regex_match(groupName, isAlphabet))
             groups[groupName].push_back(memberName);
     }
-    //for(size_t i =0; i <)
-    //cout << groupName << ", " << groups[groupName].substr(0,groups[groupName].length()-1) << endl;
-    vector<string> groupsName;
-    for(map<string,vector<string> >::iterator it = groups.begin(); it != groups.end(); ++it) {
-        groupsName.push_back(it->first);
-       sort(groups[it->first].begin(), groups[it->first].end());
-    }
-    string output;
+
+
     for(map<string,vector<string> >::iterator it = groups.begin(); it != groups.end(); ++it) {
         string name = it->first;
-        output ="";
+        string output ="";
         cout << name << ',';
-        for (std::vector<string>::iterator its=groups[name].begin(); its!=groups[name].end(); ++its)
-                output +=*its +',';
+        sort(groups[name].begin(), groups[name].end());
+        for (std::vector<string>::iterator memberIterator=groups[name].begin(); memberIterator!=groups[name].end(); ++memberIterator)
+                output +=*memberIterator +',';
         cout << output.substr(0, output.length()-1) << endl;
     }
     return 0;
