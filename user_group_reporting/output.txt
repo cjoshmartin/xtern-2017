@@ -1,0 +1,4 @@
+cat textdata.txt |  ./run
+admins,alan,david,zeee
+students,beth,zee
+teachers,charlie,zeee
