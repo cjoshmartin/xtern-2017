@@ -44,7 +44,12 @@ class linked_list {
                 bool showAbs=true;
                 Node * cur = tail_;
                 while (cur) {
-                    if(showAbs)
+                    if(cur->absolute== "BACK" || cur->absolute=="FORWARD")
+                    {
+                     cout << "I WANT TO MOVE A dir\n";
+                    cur = cur->prev_;
+                    }
+                   else if(showAbs)
                     {
                     showAbs =false; 
                     cout << cur->absolute << "\n";
@@ -77,8 +82,8 @@ int main()
             history.insert_node(input);
         else if(input.find("/") == 0)
             history.head_->relative->push(input);
-        else if(false)
-            return 2;
+        else 
+            history.head_->relative->push(history.head_->relative->top() +"/" + input);
     }
     history.print_ll();
     return 0;
