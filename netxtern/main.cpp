@@ -53,7 +53,7 @@ class linked_list {
                    else if(showAbs)
                     {
                     showAbs =false; 
-                    cout << cur->absolute << "\n";
+                    cout << cur->absolute << "\n\n";
                     }
                     else if( cur->relative->size() > 0)
                     {
@@ -79,21 +79,29 @@ int main()
     {
         regex isAbsolute("https:\/\/[A-Za-z0-9]+\.com");
         if(regex_match(input, isAbsolute))
+        {  
+            //cout << input<< "\n";
             history.insert_node(input);
+        }
         else if(input =="BACK" || input =="FORWARD" )
         {}
         else if(input.find("/") == 0)
         {
             history.head_->relative->push(input);
-            if(history.head_->relative->size() > 0)
-            cout << history.head_->absolute << input << "\n";
+        
         }
-        else /*if(history.head_->relative->size() > 0) */
+        else 
         {
-            history.head_->relative->push("/" + input);
-            cout << history.head_->absolute << history.head_->relative->top() << "\n";
+            if(history.head_->relative->size() > 0)
+            history.head_->relative->push( history.head_->relative->top() + "/" + input);
+            else
+            history.head_->relative->push(  "/" + input);
+
         }
+
+          //cout << history.head_->absolute<< "\n";
+        //history.head_->relative->debug_stack();
     }
-    //history.print_ll();
+    history.print_ll();
     return 0;
 }
