@@ -44,20 +44,20 @@ class linked_list {
                 bool showAbs=true;
                 Node * cur = tail_;
                 while (cur) {
-                    if(cur->absolute== "BACK" || cur->absolute=="FORWARD")
+                   /* if(cur->absolute== "BACK" || cur->absolute=="FORWARD")
                     {
                      cout << "I WANT TO MOVE A dir\n";
                     cur = cur->prev_;
                     }
-                   else if(showAbs)
+                   else */ if(showAbs)
                     {
                     showAbs =false; 
-                    cout << cur->absolute << "\n";
+                    //cout << cur->absolute << "\n";
                     }
                     else if( cur->relative->size() > 0)
                     {
-                        cout << cur->absolute << cur->relative->top()<<"\n"; 
-                        cur->relative->pop();
+                        //cout << cur->absolute << cur->relative->top()<<"\n"; 
+                        //cur->relative->pop();
                     }
                     else
                     {
@@ -77,14 +77,20 @@ int main()
     while(getline(cin, input))
     {
         regex isAbsolute("https:\/\/[A-Za-z0-9]+\.com");
-
-        if(regex_match(input, isAbsolute) || input== "BACK" || input=="FORWARD")
+        if(regex_match(input, isAbsolute))
             history.insert_node(input);
+        else if(input =="BACK" || input =="FORWARD" )
+        {}
         else if(input.find("/") == 0)
+        {
             history.head_->relative->push(input);
-        else 
-            history.head_->relative->push(history.head_->relative->top() +"/" + input);
+            if(history.head_->relative->size() > 0)
+            cout << history.head_->absolute << "/" << input << "\n";
+        }
+        else /*if(history.head_->relative->size() > 0) */
+            history.head_->relative->push("/" + input);
+            cout << history.head_->absolute << "/" << input << "\n";
     }
-    history.print_ll();
+    //history.print_ll();
     return 0;
 }
