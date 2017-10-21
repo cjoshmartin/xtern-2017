@@ -9,6 +9,7 @@ class Node {
     public:
         string absolute;
         Stack<string> * relative;
+        Stack<string> * history;
         bool isTravered;
         Node * prev_;
         Node * next_;
@@ -44,20 +45,20 @@ class linked_list {
                 bool showAbs=true;
                 Node * cur = tail_;
                 while (cur) {
-                   /* if(cur->absolute== "BACK" || cur->absolute=="FORWARD")
+                    if(cur->absolute== "BACK" || cur->absolute=="FORWARD")
                     {
                      cout << "I WANT TO MOVE A dir\n";
                     cur = cur->prev_;
                     }
-                   else */ if(showAbs)
+                   else if(showAbs)
                     {
                     showAbs =false; 
-                    //cout << cur->absolute << "\n";
+                    cout << cur->absolute << "\n";
                     }
                     else if( cur->relative->size() > 0)
                     {
-                        //cout << cur->absolute << cur->relative->top()<<"\n"; 
-                        //cur->relative->pop();
+                        cout << cur->absolute << cur->relative->top()<<"\n"; 
+                        cur->relative->pop();
                     }
                     else
                     {
@@ -85,11 +86,13 @@ int main()
         {
             history.head_->relative->push(input);
             if(history.head_->relative->size() > 0)
-            cout << history.head_->absolute << "/" << input << "\n";
+            cout << history.head_->absolute << input << "\n";
         }
         else /*if(history.head_->relative->size() > 0) */
+        {
             history.head_->relative->push("/" + input);
-            cout << history.head_->absolute << "/" << input << "\n";
+            cout << history.head_->absolute << history.head_->relative->top() << "\n";
+        }
     }
     //history.print_ll();
     return 0;
