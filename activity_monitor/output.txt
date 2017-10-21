@@ -1,2 +1,0 @@
-cat textdata.txt |  ./run
-58
