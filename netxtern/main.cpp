@@ -2,27 +2,84 @@
 #include <map>
 #include <vector>
 #include <regex>
-
+#include "Stack.h"
 using namespace std;
+
+class Node {
+    public:
+        string absolute;
+        Stack<string> * relative;
+        bool isTravered;
+        Node * prev_;
+        Node * next_;
+
+        Node (string abs, Node * prev, Node * next) {
+            absolute = abs ;
+            isTravered = false;
+            relative = new Stack<string>();
+            prev_ 	= prev;
+            next_ 	= next; 
+        }
+};
+
+class linked_list {
+
+    public:
+        Node * head_ = nullptr;
+        Node * tail_ = nullptr;
+
+        void insert_node (string id) {
+            if (head_) {
+                head_ = head_->prev_ = new Node (id, NULL, head_);
+            }
+            else {
+                head_ = new Node (id, NULL, head_);
+                tail_ = head_;
+            }
+        }
+
+
+        void print_ll (void) {
+            if (head_) {
+                bool showAbs=true;
+                Node * cur = tail_;
+                while (cur) {
+                    if(showAbs)
+                    {
+                    showAbs =false; 
+                    cout << cur->absolute << "\n";
+                    }
+                    else if( cur->relative->size() > 0)
+                    {
+                        cout << cur->absolute << cur->relative->top()<<"\n"; 
+                        cur->relative->pop();
+                    }
+                    else
+                    {
+                        showAbs=true;
+                        cur->isTravered = true;
+                    cur = cur->prev_;
+                    }
+                }
+            }
+        }
+};
 int main()
 {
     string input;
-    string output = "";
-    std::map<string, bool > processes;
+    linked_list history;
 
     while(getline(cin, input))
     {
-        regex isNumber("[[:digit:]]+");
+        regex isAbsolute("https:\/\/[A-Za-z0-9]+\.com");
 
-        if(regex_match(input, isNumber))
-            ( processes.find(input) == processes.end() ) ? processes[input] = true : processes[input] = !processes[input];
+        if(regex_match(input, isAbsolute) || input== "BACK" || input=="FORWARD")
+            history.insert_node(input);
+        else if(input.find("/") == 0)
+            history.head_->relative->push(input);
+        else if(false)
+            return 2;
     }
-
-    for(map<string, bool >::iterator it = processes.begin(); it != processes.end(); ++it) {
-        if(processes[it->first])
-            output += it->first +"\n";
-    }
-    (output != "") ? cout << output : cout << "0" << endl;
-
+    history.print_ll();
     return 0;
 }
