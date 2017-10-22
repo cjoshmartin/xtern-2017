@@ -1,4 +1,14 @@
-#include <iostream>
+// Ryan: Please include the Honor Pledge and Digital Signature in each file.
+
+// Ryan: You should use an initialization list here.
+
+// Honor Pledge:
+ //
+// I pledge that I have neither given nor
+//  received any help on this assignment.
+//
+//chajmart
+//
 // Stack
 //
 template <typename T>
@@ -41,6 +51,7 @@ void Stack <T>::push (T element)
 	  // Ryan: You will need to resize though.
     // Fixed: << Resizes >>
   stack_->set(++stack_pointer_, element);
+
 }
 
 //
@@ -49,13 +60,12 @@ void Stack <T>::push (T element)
 template <typename T>
 void Stack <T>::pop (void)
 {
-
-  //if(this->is_empty()){
-              //// Ryan: You should throw the empty exception here.
-    //// Fixed: << I call the empty_exception constructor here >>
-    //throw Stack::empty_exception();
-    //stack_pointer_=-1;}
-  //else
+  // if(this->is_empty()){
+  //   	  // Ryan: You should throw the empty exception here.
+  //   // Fixed: << I call the empty_exception constructor here >>
+  //   throw Stack::empty_exception();
+  //   stack_pointer_=-1;}
+  // else
     --stack_pointer_;
 }
 

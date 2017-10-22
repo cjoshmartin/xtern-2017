@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/netxtern.dir/Array.cpp.o CMakeFiles/netxtern.dir/BaseArray.cpp.o CMakeFiles/netxtern.dir/main.cpp.o CMakeFiles/netxtern.dir/Queue.cpp.o CMakeFiles/netxtern.dir/Stack.cpp.o  -o netxtern 

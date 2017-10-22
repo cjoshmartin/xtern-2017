@@ -45,5 +45,5 @@ void Stack<T>::debug_stack(void) const
   std::cout << "[" ;
  for(size_t i = 0; i < stack_->size(); i++)
   (i < stack_->size() -1 ) ? std::cout << (*stack_)[i]<< ", " : std::cout << (*stack_)[i];
-      std::cout<< "] " << std::endl;
+      std::cout<< "]\n " << std::endl;
 }

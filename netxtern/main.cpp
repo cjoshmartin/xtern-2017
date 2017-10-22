@@ -2,14 +2,14 @@
 #include <map>
 #include <vector>
 #include <regex>
-#include "Stack.h"
+#include "Queue.h"
 using namespace std;
 
 class Node {
     public:
         string absolute;
-        Stack<string> * relative;
-        Stack<string> * history;
+        // Queue<string> * relative;
+        Queue<string> * relative;
         bool isTravered;
         Node * prev_;
         Node * next_;
@@ -17,9 +17,9 @@ class Node {
         Node (string abs, Node * prev, Node * next) {
             absolute = abs ;
             isTravered = false;
-            relative = new Stack<string>();
+            relative = new Queue<string>();
             prev_ 	= prev;
-            next_ 	= next; 
+            next_ 	= next;
         }
 };
 
@@ -44,21 +44,46 @@ class linked_list {
             if (head_) {
                 bool showAbs=true;
                 Node * cur = tail_;
+                // Stack<string> * backStack = new Stack<string>();
+                Queue<string> * forwardQueue = new Queue<string>();
                 while (cur) {
-                    if(cur->absolute== "BACK" || cur->absolute=="FORWARD")
+                    if(cur->absolute== "BACK")
                     {
-                     cout << "I WANT TO MOVE A dir\n";
+                      // cout << cur->absolute << endl;
+                      // if(backQueue->size() > 0)
+                      // { string meh =backQueue->dequeue();
+                      //   forwardQueue->enqueue(meh);
+                      //   cout << meh<<"\n";
+                      // }
                     cur = cur->prev_;
+                    }
+                    else if(cur->absolute=="FORWARD")
+                    {
+                      // cout << cur->absolute << endl;
+                      // if(forwardQueue->size() > 0)
+                      // {
+                      //   // backQueue->enqueue(forwardQueue->beginning());
+                      //   cout << forwardQueue->dequeue()<<"\n";
+                      // }
+                      // cur = cur->prev_;
                     }
                    else if(showAbs)
                     {
-                    showAbs =false; 
-                    cout << cur->absolute << "\n\n";
+                    showAbs =false;
+                    // backQueue->enqueue(cur->absolute);
+                    cout << cur->absolute << "\n";
                     }
                     else if( cur->relative->size() > 0)
                     {
-                        cout << cur->absolute << cur->relative->top()<<"\n"; 
-                        cur->relative->pop();
+
+                      // if ( backQueue->is_empty() || (backQueue->end().find(cur->absolute) != string::npos ))
+                      // backQueue->debug_queue();
+                      // backQueue->enqueue(cur->absolute + cur->relative->be());
+                      string current =cur->absolute + cur->relative->dequeue();
+                      // backQueue->enqueue(current);
+                        cout << current <<"\n";
+                        // backQueue->debug_queue();
+                        // cur->relative->pop();
                     }
                     else
                     {
@@ -78,30 +103,28 @@ int main()
     while(getline(cin, input))
     {
         regex isAbsolute("https:\/\/[A-Za-z0-9]+\.com");
-        if(regex_match(input, isAbsolute))
-        {  
+        if(regex_match(input, isAbsolute) || input =="BACK" || input =="FORWARD")
+        {
             //cout << input<< "\n";
             history.insert_node(input);
         }
-        else if(input =="BACK" || input =="FORWARD" )
-        {}
         else if(input.find("/") == 0)
         {
-            history.head_->relative->push(input);
-        
+            history.head_->relative->enqueue(input);
+
         }
-        else 
+        else
         {
             if(history.head_->relative->size() > 0)
-            history.head_->relative->push( history.head_->relative->top() + "/" + input);
+            history.head_->relative->enqueue( history.head_->relative->end() + "/" + input);
             else
-            history.head_->relative->push(  "/" + input);
+            history.head_->relative->enqueue(  "/" + input);
 
         }
 
           //cout << history.head_->absolute<< "\n";
-        //history.head_->relative->debug_stack();
     }
     history.print_ll();
+    history.head_->relative->debug_queue();
     return 0;
 }
