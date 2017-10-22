@@ -9,4 +9,3 @@ r/kittens
 BACK
 FORWARD
 new
-https://cjoshmartin.com
