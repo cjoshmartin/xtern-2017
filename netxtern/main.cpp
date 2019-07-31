@@ -24,7 +24,6 @@ int main()
     {
       transform(input.begin(), input.end(), input.begin(), ::tolower); // The scheme and host are case-insensitive. The proposed normalization solution will convert these to lowercase.
     }
-    // NOTE TO XTERN: WOOWW! last year, I learn python, this year, I learned how to use regex! SWEET!
 
     regex isHTTP("(http(|s):\/\/)(www\.)?([a-z0-9]+)(\.[a-z0-9]+)(\.[a-z0-9]+)?"); // check for a url like http://foo.com or http://foo.co.uk or http://www.foo.co.uk
     regex isServer("([a-z0-9]+:\/\/)(([a-z0-9]+)(:[a-z0-9]+)?)?(\@)?([a-z0-9]+)(\:[0-9]+)?"); // check if a url is like foo://tacos foo://tacos:8080 or foo://username:password@tacos:80
@@ -66,7 +65,7 @@ int main()
       }
     }
     // prints the links
-    cout << history[i-1] << "\n"; // this is the magic. That allows me not to use a stack or a queue or a linklist... (try it, I was way over think it haha)
+    cout << history[i-1] << "\n"; 
   }
   return 0;
 }

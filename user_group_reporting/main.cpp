@@ -3,8 +3,6 @@
 // 2017
 
 
-// NOTE: I am unsure if you want me to show off, or if you want the most simple solution
-
 #include <iostream>
 #include <map>
 #include <algorithm>
